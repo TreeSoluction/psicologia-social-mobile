@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="BEM VINDO A PSI-SOCIAL"
+             x:Class="psi_social_mobile.HomePage">
+
+    <StackLayout
+            Padding="30,30"
+            Spacing="30"
+            BackgroundColor="AliceBlue"
+            VerticalOptions="FillAndExpand"
+    >
+        <StackLayout
+            >
+            <Image HorizontalOptions="FillAndExpand" HeightRequest="300" BackgroundColor="Gray"></Image>
+            <HorizontalStackLayout>
+                <Image></Image>
+                <Label x:Name="nome" FontSize="30" Text="" HorizontalTextAlignment="Start"></Label>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <Button x:Name="numero" Padding="0,0" FontSize="20" TextColor="Black" Text="" FontAttributes="Bold" HorizontalOptions="Start" BackgroundColor="Transparent" Clicked="OnNumeroButtonClicked"></Button>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <Label x:Name="frase" FontSize="20" Text="" FontAttributes="Italic" HorizontalTextAlignment="Start"></Label>
+            </HorizontalStackLayout>
+        </StackLayout>
+        
+        <Button x:Name="ButtonHelper" Clicked="OnHelperButtonClicked" Text="Preciso de ajuda" VerticalOptions="EndAndExpand" HorizontalOptions="Fill"></Button>
+        <HorizontalStackLayout
+            Spacing="20"
+            HorizontalOptions="Center"
+            >
+            <Button x:Name="Psicologos" Text="Psicologos" HorizontalOptions="Start"></Button>
+            <Button x:Name="MeuPerfil" Text="Meu Perfil" HorizontalOptions="End"></Button>
+        </HorizontalStackLayout>
+    </StackLayout>
+
+</ContentPage>

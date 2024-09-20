@@ -1,14 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="BEM VINDO A PSI-SOCIAL"
              x:Class="psi_social_mobile.MainPage">
 
-    <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
-            <Label>TESTE</Label>
-        </VerticalStackLayout>
-    </ScrollView>
+            <Label>Email</Label>
+                <Entry x:Name="email" Placeholder="Enter your name" />
+            <Label>CPF</Label>
+                <Entry x:Name="cpf" Placeholder="Enter your age" />
+        <Button Text="Entrar"
+                Clicked="Button_Clicked"></Button>
+    </VerticalStackLayout>
 
 </ContentPage>
