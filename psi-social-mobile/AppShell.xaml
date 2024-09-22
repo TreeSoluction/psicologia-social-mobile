@@ -17,4 +17,14 @@
         ContentTemplate="{DataTemplate local:HomePage}"
         Route="HomePage" />
 
+    <ShellContent
+         Title="Register"
+         ContentTemplate="{DataTemplate local:PsiRegister}"
+         Route="PsiRegister" />
+    
+    <ShellContent
+      Title="Confirmacao De Cadastro"
+      ContentTemplate="{DataTemplate local:Confirmacao}"
+      Route="Confirmacao" />
+
 </Shell>

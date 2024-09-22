@@ -63,12 +63,24 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Confirmacao.xaml.cs">
+	    <DependentUpon>Confirmacao.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="PsiRegister.xaml.cs">
+	    <DependentUpon>PsiRegister.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="HomePage.xaml.cs">
 	    <DependentUpon>HomePage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Confirmacao.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="PsiRegister.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="HomePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

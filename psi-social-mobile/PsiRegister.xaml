@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Registro"
+             x:Class="psi_social_mobile.PsiRegister">
+
+    <StackLayout
+            Padding="30,30"
+            Spacing="30"
+            BackgroundColor="AliceBlue"
+            VerticalOptions="FillAndExpand"
+    >
+
+        <VerticalStackLayout>
+            <Label Text="Email"></Label>
+            <Entry x:Name="email" Placeholder="example@gmail.com" />
+            <Label Text="CRP (caso tenha)"></Label>
+            <HorizontalStackLayout VerticalOptions="Center">
+                <Entry x:Name="crp" Placeholder="123123123" />
+                <CheckBox/>
+                <Label VerticalOptions="Center" Text="Nao tenho"/>
+            </HorizontalStackLayout>
+            <Label Text="Telefone"></Label>
+            <Entry x:Name="phone" Placeholder="99 999999999" />
+            <Label Text="Nome"></Label>
+            <Entry x:Name="name" Placeholder="John Doe" />
+            <Label Text="CPF"></Label>
+            <Entry x:Name="cpf" Placeholder="111.111.111-11" />
+            <Label Text="Importante:" FontAttributes="Bold" Margin="0,10"/>
+            <Label Text="Depois de clicar em registrar a nossa equipe vai entrar em contato com voce para responder um teste psicotecnico, o seu resultado nesse teste vai definir se voce esta apto para seguir com o uso do aplicativo." />
+            <Button Text="Registrar" Clicked="Button_Clicked_1" Margin="0,10"></Button>
+        </VerticalStackLayout>
+        
+    </StackLayout>
+
+</ContentPage>

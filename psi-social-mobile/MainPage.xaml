@@ -13,6 +13,8 @@
                 <Entry x:Name="cpf" Placeholder="Enter your age" />
         <Button Text="Entrar"
                 Clicked="Button_Clicked"></Button>
+        <Button BackgroundColor="MediumPurple" Text="Sou Psicologo / Estudante"
+            Clicked="PsiRegister_Clicked"></Button>
     </VerticalStackLayout>
 
 </ContentPage>

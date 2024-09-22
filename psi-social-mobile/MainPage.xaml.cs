@@ -8,13 +8,20 @@ namespace psi_social_mobile
         public MainPage()
         {
             InitializeComponent();
-            Shell.Current.GoToAsync("///HomePage").GetAwaiter();
         }
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-
             await TryLogin_REQUEST();
+        }
+
+        private async void PsiRegister_Clicked(object sender, EventArgs e)
+        {
+            await PsiRegister();
+        }
+        private async Task PsiRegister()
+        {
+            await Shell.Current.GoToAsync("///PsiRegister");
         }
 
         private async Task TryLogin_REQUEST()
