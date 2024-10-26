@@ -8,58 +8,19 @@ namespace psi_social_mobile
         public MainPage()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
+            Task.Run(async () =>
+            {
+                await Shell.Current.GoToAsync("///Disponibility");
+            });
         }
 
-        private async void Button_Clicked(object sender, EventArgs e)
+        private void Button_Clicked_1(object sender, EventArgs e)
         {
-            await TryLogin_REQUEST();
-        }
-
-        private async void PsiRegister_Clicked(object sender, EventArgs e)
-        {
-            await PsiRegister();
-        }
-        private async Task PsiRegister()
-        {
-            await Shell.Current.GoToAsync("///PsiRegister");
-        }
-
-        private async Task TryLogin_REQUEST()
-        {
-            var client = new HttpClient();
-
-            var emailValue = email.Text;
-            var cpfValue = cpf.Text;
-
-            var registerObject = new
+            Task.Run(async () =>
             {
-                email = emailValue,
-                cpf = cpfValue
-            };
-
-            if (emailValue == "" || emailValue == null || cpfValue == "" || cpfValue == null)
-            {
-                await DisplayAlert("Erro", "Necessario preencher todos os campos", "OK");
-            }
-
-            var jsonContent = new StringContent(JsonSerializer.Serialize(registerObject), Encoding.UTF8, "application/json");
-
-            try
-            {
-                var response = await client.PostAsync("http://10.0.2.2:3001/paciente/fast", jsonContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    await Shell.Current.GoToAsync("///HomePage");
-                }
-                else
-                {
-                    await DisplayAlert("Erro", $"{response.Content.ToString()}", "OK");
-                }
-            }
-            catch (Exception e)
-            {
-                await DisplayAlert("Erro", $"{e}", "OK");
-            }
+                await Shell.Current.GoToAsync("///PsiRegister");
+            });
         }
     }
 }

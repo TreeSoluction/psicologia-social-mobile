@@ -1,6 +1,7 @@
 ﻿using psi_social_mobile.Domain;
 using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace psi_social_mobile
 {
@@ -9,70 +10,113 @@ namespace psi_social_mobile
         public PsiRegister()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
         }
 
-        private async void Button_Clicked_1(object sender, EventArgs e)
+        public bool ValidatedForm()
         {
-            await GetHelp_REQUEST();
-        }
+            string name = NameEntry.Text?.Trim();
+            string crp = CrpEntry.Text?.Trim();
+            string email = EmailEntry.Text?.Trim();
+            string phone = PhoneEntry.Text?.Trim();
 
-        private async Task GetHelp_REQUEST()
-        {
-            var client = new HttpClient();
-
-            try
+            if (string.IsNullOrEmpty(name))
             {
+                DisplayAlert("Erro", "O nome completo é obrigatório.", "OK");
+                return false;
+            }
 
-                var payload = new
-                {
-                    email = email.Text,
-                    crp = crp.Text,
-                    telefone = phone.Text,
-                    nome = name.Text,
-                    cpf = cpf.Text
-                };
+            if (!string.IsNullOrEmpty(crp) && !Regex.IsMatch(crp, @"^\d+$") && crp.Length == 7)
+            {
+                DisplayAlert("Erro", "O CRP deve conter apenas números e deve ter o tamanho de 7", "OK");
+                return false;;
+            }
 
-                var json = JsonSerializer.Serialize(payload);
-                var response = await client.PostAsync("http://10.0.2.2:3001/psicologo", new StringContent(json, Encoding.UTF8, "application/json"));
-                var responseBody = response.Content.ReadAsStringAsync();
-                if (response.IsSuccessStatusCode)
-                {
-                    await Shell.Current.GoToAsync("///Confirmacao");
-                }
-                else
-                {
-                    var errorRequest = JsonSerializer.Deserialize<ErrorMessage>(await response.Content.ReadAsStringAsync());
-                    var errors = new List<string>();
+            if (string.IsNullOrEmpty(email) || !Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            {
+                DisplayAlert("Erro", "Insira um endereço de e-mail válido.", "OK");
+                return false;;
+            }
 
-                    foreach (var error in errorRequest.message)
+            if (string.IsNullOrEmpty(phone))
+            {
+                DisplayAlert("Erro", "O telefone deve seguir o formato (XX) XXXXX-XXXX.", "OK");
+                return false;;
+            }
+
+            return true;
+        }
+
+        private void Entry_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var input = new string(e.NewTextValue.Where(char.IsDigit).ToArray());
+            var formattedInput = input;
+            if (input.Length > 11)
+            {
+                 formattedInput = input.Substring(0, 11);
+            }
+            if (formattedInput != e.NewTextValue)
+                ((Entry)sender).Text = formattedInput;
+        }
+
+        private async void Cadastrar_OnClicked(object? sender, EventArgs e)
+        {
+            if (ValidatedForm())
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    string url = "http://10.0.2.2:3001/psicologo";
+
+                    var userData = new
                     {
-                        if (error.StartsWith("crp"))
+                        nome = NameEntry.Text?.Trim(),
+                        crp = CrpEntry.Text?.Trim(),
+                        email = EmailEntry.Text?.Trim(),
+                        telefone = PhoneEntry.Text?.Trim()
+                    };
+
+                    string json = JsonSerializer.Serialize(userData);
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    try
+                    {
+                        HttpResponseMessage response = await client.PostAsync(url, content);
+
+                        if (response.IsSuccessStatusCode)
                         {
-                            errors.Add(PsiRegisterErros.CRP_ERROR);
+                            string responseContent = await response.Content.ReadAsStringAsync();
+                            await DisplayAlert("Sucesso", "Cadastro realizado com sucesso!", "OK");
+                            await Navigation.PushAsync(new PosRegister());
                         }
-                        if (error.StartsWith("cpf"))
+                        else
                         {
-                            errors.Add(PsiRegisterErros.CPF_ERROR);
-                        }
-                        if (error.StartsWith("nome"))
-                        {
-                            errors.Add(PsiRegisterErros.NOME_ERROR);
-                        }
-                        if (error.StartsWith("email"))
-                        {
-                            errors.Add(PsiRegisterErros.EMAIL_ERROR);
+                            await DisplayAlert("Erro", "Falha ao cadastrar. Tente novamente.", "OK");
                         }
                     }
-
-                    var errorMessage = String.Join("\n", errors);
-
-                    await DisplayAlert("Erro", $"{errorMessage}", "OK");
+                    catch (Exception ex)
+                    {
+                        await DisplayAlert("Erro", $"Erro ao se conectar: {ex.Message}", "OK");
+                    }
                 }
             }
-            catch (Exception e)
+        }
+
+        private void Button_OnClicked(object? sender, EventArgs e)
+        {
+            Task.Run(async () =>
             {
-                await DisplayAlert("Erro", $"{e}", "OK");
-            }
+                await Shell.Current.GoToAsync("///MainPage");
+            });
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            Task.Run(async () =>
+            {
+                await Shell.Current.GoToAsync("///MainPage");
+            });
+
+            return true;
         }
     }
 }

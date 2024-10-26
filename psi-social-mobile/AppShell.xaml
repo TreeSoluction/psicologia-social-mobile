@@ -13,18 +13,18 @@
         Route="MainPage" />
 
     <ShellContent
-        Title="Inicio"
-        ContentTemplate="{DataTemplate local:HomePage}"
-        Route="HomePage" />
-
-    <ShellContent
          Title="Register"
          ContentTemplate="{DataTemplate local:PsiRegister}"
          Route="PsiRegister" />
-    
+
     <ShellContent
-      Title="Confirmacao De Cadastro"
-      ContentTemplate="{DataTemplate local:Confirmacao}"
-      Route="Confirmacao" />
+        Title="Pos Register"
+        ContentTemplate="{DataTemplate local:PosRegister}"
+        Route="PosRegister" />
+
+    <ShellContent
+        Title="Disponibility Change"
+        ContentTemplate="{DataTemplate local:DisponibilityChange}"
+        Route="Disponibility" />
 
 </Shell>

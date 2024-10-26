@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="psi_social_mobile.DisponibilityChange"
+             Title="">
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <StackLayout Margin="0,20,0,0">
+                <Image MaximumHeightRequest="150" Source="Resources/Images/p.png"></Image>
+            </StackLayout>
+            <Label FontSize="20" Margin="0,20,0,0">
+                Para desativar os pedidos de ajuda voce deve colocar o seu email no campo abaixo e clicar em desativar
+            </Label>
+            <Label Margin="0,20,0,0">Email</Label>
+            <Entry  x:Name="EmailEntry" Keyboard="Email" Margin="0,0,0,20"></Entry>
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <Button
+                    Clicked="Button_Deactive"
+                    Grid.Column="0"
+                    HorizontalOptions="Fill"
+                    BackgroundColor="IndianRed"
+                    Text="Desativar"
+                    HeightRequest="50"/>
+                <Button
+                    Clicked="Button_Active"
+                    Grid.Column="1"
+                    HorizontalOptions="Fill"
+                    Text="Ativar"
+                    BackgroundColor="SeaGreen"
+                    HeightRequest="50"/>
+            </Grid>
+            <Button Margin="0,20,0,0" Text="Voltar" Clicked="Button_OnClicked"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
